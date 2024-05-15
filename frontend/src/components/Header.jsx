@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/bmlogo.png";
 import user from "../assets/user.svg";
 import Navbar from "./Navbar";
 import { MdMenu, MdClose } from "react-icons/md";
@@ -35,8 +35,8 @@ const Header = () => {
       <div className="flexBetween py-3">
         {/* logo */}
         <Link to={"/"} className="flex items-center ga-x-2">
-          <img src={logo} alt="logoimg" height={31} width={31} />
-          <span className="bold-24 hidden xs:flex">BabcockMall</span>
+          <img src={logo} alt="logoimg" height={41} width={41} />
+          <span className="pl-2 pt-5 bold-24 hidden xs:flex">BabcockMall</span>
         </Link>
         {/* Nav & Buttons */}
         <div className="flexCenter gap-x-4">

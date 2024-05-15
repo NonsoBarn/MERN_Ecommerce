@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/bmlogo.png";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 const Footer = () => {
@@ -8,8 +8,10 @@ const Footer = () => {
       <div className="flexCenter flex-col gap-y-4">
         {/* logo */}
         <Link to={"/"} className="flex items-center ga-x-2">
-          <img src={logo} alt="logoimg" height={31} width={31} />
-          <span className="bold-24 hidden xs:flex text-white">BabcockMall</span>
+          <img src={logo} alt="logoimg" height={41} width={41} />
+          <span className="text-white pl-2 pt-5 bold-24 hidden xs:flex">
+            BabcockMall
+          </span>
         </Link>
         {/* nav */}
         <div className="py-4">

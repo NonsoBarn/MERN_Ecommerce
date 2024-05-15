@@ -1,5 +1,5 @@
 import { TbTruckReturn } from "react-icons/tb";
-import about from "../assets/about.png";
+import about from "../assets/stripe.svg";
 
 const About = () => {
   return (
@@ -47,7 +47,7 @@ const About = () => {
         </div>
         {/* right */}
         <div className="flex-1 flexCenter">
-          <div>
+          <div className="hidden md:flex">
             <img src={about} alt="" height={488} width={488} />
           </div>
         </div>
