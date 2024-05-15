@@ -1,7 +1,16 @@
-import LATEST from "../assets/latest";
+// import LATEST from "../assets/latest";
+import { useEffect, useState } from "react";
 import Item from "./Item";
 
 const NewArrivals = () => {
+  const [new_products, setNew_products] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/newproducts")
+      .then((response) => response.json())
+      .then((data) => setNew_products(data));
+  }, []);
+
   return (
     <section className="max-padd-container bg-primary p-12 xl:py-28">
       <div className="text-center max-w-xl mx-auto">
@@ -13,7 +22,7 @@ const NewArrivals = () => {
       </div>
       {/* Container */}
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 gap-y-28 mt-32">
-        {LATEST.map((item) => (
+        {new_products.map((item) => (
           <Item
             key={item.id}
             id={item.id}

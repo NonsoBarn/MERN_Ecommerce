@@ -1,4 +1,4 @@
-import logo from "../assets/logo.svg";
+import logo from "../assets/bmlogo.png";
 import profileIcon from "../assets/profile.png";
 
 const Navbar = () => {
@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="bg-white py-2 ring-1 ring-slate-900/5 relative">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-20 flexBetween">
         <div>
-          <img src={logo} alt="logoicon" />
+          <img src={logo} alt="logoicon" width={45} height={45} />
         </div>
         <div className="hidden sm:flex uppercase bold-22 text-white bg-secondary px-3 rounded-md tracking-widest line-clamp-1 max-xs:bold-18 max-xs:py-2 max-xs:px-1">
           Admin Panel
