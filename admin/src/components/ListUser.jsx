@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { TbTrash } from "react-icons/tb";
+import userdummy from "../assets/dummy2.png";
 
-const ListProduct = () => {
-  const [allProducts, setAllProducts] = useState([]);
+const ListUser = () => {
+  const [allUsers, setAllUsers] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch("http://localhost:4000/allproducts")
+    await fetch("http://localhost:4000/allusers")
       .then((res) => res.json())
       .then((date) => {
-        setAllProducts(date);
+        setAllUsers(date);
       });
   };
 
@@ -16,8 +17,8 @@ const ListProduct = () => {
     fetchInfo();
   }, []);
 
-  const remove_product = async (id) => {
-    await fetch("http://localhost:4000/removeproduct", {
+  const remove_user = async (id) => {
+    await fetch("http://localhost:4000/removeuser", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -30,29 +31,27 @@ const ListProduct = () => {
 
   return (
     <div className="P-2 box-border bg-white mb-0 rounded-sm w-full mt-5 lg:ml-5">
-      <h4 className="bold-22 p-5 uppercase">Products List</h4>
+      <h4 className="bold-22 p-5 uppercase">Users List</h4>
       <div className="max-h-[77vh] overflow-auto px-4 text-center">
         <table className="w-full mx-auto">
           <thead>
             <tr className="bg-primary bold-14 sm:regular-22 text-start py-12">
               <th className="p-2">Products</th>
-              <th className="p-2">Title</th>
-              <th className="p-2">Old Price</th>
-              <th className="p-2">New Price</th>
+              <th className="p-2">Name</th>
+              <th className="p-2">Email</th>
               <th className="p-2">Category</th>
-
               <th className="p-2">Remove</th>
             </tr>
           </thead>
           <tbody>
-            {allProducts.map((product, i) => (
+            {allUsers.map((user, i) => (
               <tr
                 key={i}
                 className="border-b border-slate-900/20 text-gray-20 p-6 medium-16"
               >
                 <td className="flexCenter my-2">
                   <img
-                    src={product.image}
+                    src={userdummy}
                     alt=""
                     height={55}
                     width={55}
@@ -60,16 +59,16 @@ const ListProduct = () => {
                   />
                 </td>
                 <td>
-                  <div className="line-clamp-3">{product.name}</div>
+                  <div className="line-clamp-3">{user.username}</div>
                 </td>
-                <td>₦{product.old_price}.00</td>
-                <td>₦{product.new_price}.00</td>
-                <td>{product.category}</td>
+
+                <td>{user.email}</td>
+                <td>NIL</td>
 
                 <td>
-                  <div className="bold-22 pl-6 sm:pl-14">
+                  <div className="bold-22 pl-6 sm:pl-24">
                     <TbTrash
-                      onClick={() => remove_product(product.id)}
+                      onClick={() => remove_user(user.id)}
                       className="cursor-pointer"
                     />
                   </div>
@@ -83,4 +82,4 @@ const ListProduct = () => {
   );
 };
 
-export default ListProduct;
+export default ListUser;

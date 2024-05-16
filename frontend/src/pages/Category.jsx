@@ -7,6 +7,7 @@ import { ShopContext } from "../context/ShopContext";
 
 const Category = ({ banner, category }) => {
   const { all_products } = useContext(ShopContext);
+  console.log(all_products);
   return (
     <section className="max-padd-container bg-primary">
       <div className="pt-6">

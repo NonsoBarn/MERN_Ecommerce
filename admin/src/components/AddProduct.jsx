@@ -6,7 +6,8 @@ const AddProduct = () => {
   const [productDetails, setProductDetails] = useState({
     name: "",
     image: "",
-    category: "clothing",
+    description: "",
+    category: "miscellaneous",
     new_price: "",
     old_price: "",
   });
@@ -73,6 +74,17 @@ const AddProduct = () => {
         />
       </div>
       <div className="mb-3">
+        <h4 className="bold-18 pb-2">Product Description:</h4>
+        <input
+          value={productDetails.description}
+          onChange={changeHandler}
+          type="text"
+          name="description"
+          placeholder="Type here..."
+          className="bg-primary outline-none max-w-80 w-full py-3 px-4 rounded-md"
+        />
+      </div>
+      <div className="mb-3">
         <h4 className="bold-18 pb-2">Price:</h4>
         <input
           value={productDetails.old_price}
@@ -103,9 +115,10 @@ const AddProduct = () => {
           id=""
           className="bg-primary ring-1 ring-slate-900/20 medium-16 rounded-sm outline-none"
         >
-          <option value="clothing">Clothing</option>
-          <option value="cosmetics">Cosmetics</option>
+          <option value="all">All</option>
+          <option value="groceries">Groceries</option>
           <option value="electronics">Electronics</option>
+          <option value="Miscellaneous">miscellaneous</option>
         </select>
       </div>
       <div>

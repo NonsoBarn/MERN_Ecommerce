@@ -59,6 +59,10 @@ const Product = mongoose.model("Product", {
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
@@ -99,6 +103,7 @@ app.post("/addproduct", async (req, res) => {
   const product = new Product({
     id: id,
     name: req.body.name,
+    description: req.body.description,
     image: req.body.image,
     category: req.body.category,
     new_price: req.body.new_price,
@@ -213,6 +218,16 @@ app.get("/allusers", async (req, res) => {
   res.send(users);
 });
 
+//delete product
+app.post("/removeuser", async (req, res) => {
+  await User.findOneAndDelete({ id: req.body.id });
+  console.log("Removed");
+  res.json({
+    success: true,
+    name: req.body.name,
+  });
+});
+
 ////////////////////////////////////////////////////////////////////////
 
 // New product endpoint
@@ -225,7 +240,7 @@ app.get("/newproducts", async (req, res) => {
 
 // popular product endpoint
 app.get("/popularproducts", async (req, res) => {
-  let products = await Product.find({ category: "clothing" });
+  let products = await Product.find({ category: "groceries" });
   let popularproduct = products.slice(0, 4);
   console.log("popular products fetched");
   res.send(popularproduct);

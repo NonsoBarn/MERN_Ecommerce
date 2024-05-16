@@ -53,9 +53,9 @@ const ProductDisplay = (props) => {
         </div>
         <div>
           <div className="flex items-baseline gap-x-6 bold-28 sm:bold-32 mt-4 ">
-            <div>${product.new_price}.00</div>
+            <div>₦{product.new_price}.00</div>
             <div className="bold-20 sm:bold-28 line-through text-secondary">
-              ${product.old_price}.00
+              ₦{product.old_price}.00
             </div>
           </div>
           <div className="flex gap-3 mb-8 pt-5 max-w-[555px]">

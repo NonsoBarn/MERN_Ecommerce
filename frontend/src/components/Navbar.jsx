@@ -1,31 +1,32 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 
 const Navbar = ({ containerStyles }) => {
   return (
     <nav className={`${containerStyles}`}>
       <NavLink
-        to={"/"}
+        to={"/all"}
         className={({ isActive }) => (isActive ? "active-link" : "")}
       >
-        Home
+        All
       </NavLink>
       <NavLink
-        to={"/clothing"}
+        to={"/groceries"}
         className={({ isActive }) => (isActive ? "active-link" : "")}
       >
-        Clothing
-      </NavLink>
-      <NavLink
-        to={"/cosmetics"}
-        className={({ isActive }) => (isActive ? "active-link" : "")}
-      >
-        Cosmetics
+        Groceries
       </NavLink>
       <NavLink
         to={"/electronics"}
         className={({ isActive }) => (isActive ? "active-link" : "")}
       >
         Electronics
+      </NavLink>
+      <NavLink
+        to={"/miscellaneous"}
+        className={({ isActive }) => (isActive ? "active-link" : "")}
+      >
+        Miscellaneous
       </NavLink>
     </nav>
   );

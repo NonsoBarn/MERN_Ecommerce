@@ -17,21 +17,28 @@ export default function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/all" element={<Home />} />
           <Route
-            path="/clothing"
-            element={<Category category={"clothing"} banner={clothingbanner} />}
+            path="/all"
+            element={<Category category={"all"} banner={clothingbanner} />}
           />
           <Route
-            path="/cosmetics"
+            path="/groceries"
             element={
-              <Category category={"cosmetics"} banner={cosmeticsbanner} />
+              <Category category={"groceries"} banner={cosmeticsbanner} />
             }
           />
           <Route
             path="/electronics"
             element={
               <Category category={"electronics"} banner={electronicsbanner} />
+            }
+          />
+
+          <Route
+            path="/miscellaneous"
+            element={
+              <Category category={"miscellaneous"} banner={electronicsbanner} />
             }
           />
           <Route path="/product" element={<Product />}>

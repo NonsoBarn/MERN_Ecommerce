@@ -22,7 +22,7 @@ const Product = () => {
       <div>
         <ProductId product={product} />
         <ProductDisplay product={product} />
-        <ProductDescription />
+        <ProductDescription product={product} />
         <PopularProducts />
       </div>
     </section>

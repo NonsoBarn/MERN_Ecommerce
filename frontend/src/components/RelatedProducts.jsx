@@ -50,9 +50,9 @@ const RelatedProducts = () => {
                   </p>
                   <div className="flexBetween">
                     <div className="flexBetween gap-x-2 medium-16">
-                      <span>${item.new_price}.00</span>
+                      <span>₦{item.new_price}.00</span>
                       <span className="line-through text-secondary">
-                        ${item.old_price}.00
+                        ₦{item.old_price}.00
                       </span>
                     </div>
                     <RiShoppingBag2Line className="text-xl hover:text-secondary" />
