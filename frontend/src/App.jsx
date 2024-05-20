@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import AllProducts from "./pages/AllProducts";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute"; // Make sure PrivateRoute is imported correctly
+import NotFound from "./components/NotFound";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -65,6 +66,7 @@ export default function App() {
             <Route path="/cart-page" element={<Cart />} />
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
