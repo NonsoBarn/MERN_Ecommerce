@@ -246,6 +246,15 @@ app.get("/popularproducts", async (req, res) => {
   res.send(popularproduct);
 });
 
+// popular product endpoint
+app.get("/relatedproducts", async (req, res) => {
+  let products = await Product.find({});
+  // let relatedproduct = products.slice(5, 13);
+  let relatedproduct = products.slice(0, 4);
+  console.log("related products fetched");
+  res.send(relatedproduct);
+});
+
 // middleware to fetch user
 const fetchUser = async (req, res, next) => {
   const token = req.header("auth-token");

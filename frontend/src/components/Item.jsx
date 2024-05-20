@@ -2,7 +2,8 @@
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const Item = ({ id, name, image, old_price, new_price }) => {
+const Item = ({ id, name, image, old_price, new_price, description }) => {
+  console.log(name, description);
   return (
     <Link
       onClick={window.scrollTo(0, 0)}
@@ -18,11 +19,12 @@ const Item = ({ id, name, image, old_price, new_price }) => {
           className="rounded-lg drop-shadow-xl absolute bottom-50 "
         />
       </div>
-      <div className="flex flex-col gap-y-3 pt-24">
+      <div className="flex flex-col gap-y-3 pt-28">
         <h4 className="line-clamp-2 medium-16">{name}</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quas
-          ipsam magnam placeat sint debitis maxime.
+          {description && description.length > 100
+            ? `${description.slice(0, 100)}...`
+            : description}
         </p>
         <div className="flexBetween">
           <div className="flex gap-x-4 medium-16">

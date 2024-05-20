@@ -1,10 +1,19 @@
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LATEST from "../assets/latest";
+
 import "swiper/css";
 import { Link } from "react-router-dom";
 import { RiShoppingBag2Line } from "react-icons/ri";
 
 const RelatedProducts = () => {
+  const [related_products, setRelated_products] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/relatedproducts")
+      .then((response) => response.json())
+      .then((data) => setRelated_products(data));
+  }, []);
+
   return (
     <div>
       <h4 className="border-l-4 pl-2 border-secondary bold-20">
@@ -29,7 +38,7 @@ const RelatedProducts = () => {
           }}
           className="mt-5 h-[140px]"
         >
-          {LATEST.map((item, i) => (
+          {related_products.map((item, i) => (
             <SwiperSlide key={i}>
               <Link
                 onClick={window.scrollTo(0, 0)}

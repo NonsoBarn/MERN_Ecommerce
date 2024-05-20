@@ -10,28 +10,6 @@ const ProductDisplay = (props) => {
     <section className="max-padd-container flex flex-col gap-8 xl:flex-row bg-primary py-4">
       {/* left side */}
       <div className="flex gap-x-2 xl:flex-1 py-5">
-        <div className="flex flex-col gap-[7px] flex-wrap">
-          <img
-            src={product.image}
-            alt="prodimg"
-            className="max-h-[84px] rounded-lg bg-gray"
-          />
-          <img
-            src={product.image}
-            alt="prodimg"
-            className="max-h-[84px] rounded-lg bg-gray"
-          />
-          <img
-            src={product.image}
-            alt="prodimg"
-            className="max-h-[84px] rounded-lg bg-gray"
-          />
-          <img
-            src={product.image}
-            alt="prodimg"
-            className="max-h-[84px] rounded-lg bg-gray"
-          />
-        </div>
         <div className="max-h-[355px] w-auto flex">
           <img
             src={product.image}
