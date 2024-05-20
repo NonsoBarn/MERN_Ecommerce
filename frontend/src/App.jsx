@@ -20,6 +20,7 @@ export default function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("auth-token");
+
     setIsAuthenticated(!!token);
   }, []);
 
@@ -57,14 +58,13 @@ export default function App() {
             <Route path=":productId" element={<Product />} />
           </Route>
 
-          <Route path="/cart-page" element={<PrivateRoute />}>
+          <Route
+            path="/cart-page"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
             <Route path="/cart-page" element={<Cart />} />
           </Route>
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/login"
-            element={<Login />}
-          />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>

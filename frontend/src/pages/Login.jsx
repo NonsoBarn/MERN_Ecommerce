@@ -19,45 +19,45 @@ const Login = () => {
 
   const login = async () => {
     console.log("login executed", formData);
-    let responseData;
-    await fetch("http://localhost:4000/api/auth/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/formData",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => (responseData = data));
-
-    if (responseData.success) {
-      localStorage.setItem("auth-token", responseData.token);
-      window.location.replace("/");
-    } else {
-      alert(responseData.errors);
+    try {
+      const response = await fetch("http://localhost:4000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const responseData = await response.json();
+      if (responseData.success) {
+        localStorage.setItem("auth-token", responseData.token); // Store token in local storage
+        window.location.replace("/");
+      } else {
+        alert(responseData.errors);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
     }
   };
 
   const signup = async () => {
     console.log("signup executed", formData);
-    let responseData;
-    await fetch("http://localhost:4000/api/auth/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/formData",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => (responseData = data));
-
-    if (responseData.success) {
-      localStorage.setItem("auth-token", responseData.token);
-      window.location.replace("/");
-    } else {
-      alert(responseData.errors);
+    try {
+      const response = await fetch("http://localhost:4000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const responseData = await response.json();
+      if (responseData.success) {
+        localStorage.setItem("auth-token", responseData.token); // Store token in local storage
+        window.location.replace("/");
+      } else {
+        alert(responseData.errors);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
     }
   };
 
