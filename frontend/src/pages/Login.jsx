@@ -4,6 +4,8 @@ const Login = () => {
   const [state, setState] = useState("Login");
   const [formData, setFormData] = useState({
     username: "",
+    address: "",
+    phone: "",
     password: "",
     email: "",
   });
@@ -65,14 +67,32 @@ const Login = () => {
         <h3 className="h3">{state}</h3>
         <div className="flex flex-col gap-4 mt-7">
           {state === "Sign Up" ? (
-            <input
-              name="username"
-              type="text"
-              value={formData.username}
-              onChange={changeHandler}
-              placeholder="Your Name"
-              className="h-8 w-full pl-5 bg-white outline-none rounded-xl text-sm"
-            />
+            <div className="flex flex-col gap-4">
+              <input
+                name="username"
+                type="text"
+                value={formData.username}
+                onChange={changeHandler}
+                placeholder="Your Name"
+                className="h-8 w-full pl-5 bg-white outline-none rounded-xl text-sm"
+              />
+              <input
+                name="address"
+                type="text"
+                value={formData.address}
+                onChange={changeHandler}
+                placeholder="Your Address"
+                className="h-8 w-full pl-5 bg-white outline-none rounded-xl text-sm "
+              />
+              <input
+                name="phone"
+                type="number"
+                value={formData.phone}
+                onChange={changeHandler}
+                placeholder="Your phone Number"
+                className="h-8 w-full pl-5 bg-white outline-none rounded-xl text-sm"
+              />
+            </div>
           ) : (
             ""
           )}

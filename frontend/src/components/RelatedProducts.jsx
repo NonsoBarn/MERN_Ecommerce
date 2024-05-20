@@ -9,7 +9,7 @@ const RelatedProducts = () => {
   const [related_products, setRelated_products] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/relatedproducts")
+    fetch("http://localhost:4000/api/products/relatedproducts")
       .then((response) => response.json())
       .then((data) => setRelated_products(data));
   }, []);

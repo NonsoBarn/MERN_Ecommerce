@@ -1,4 +1,5 @@
-import { TbArrowLeft, TbArrowRight } from "react-icons/tb";
+/* eslint-disable react/prop-types */
+import { TbArrowRight } from "react-icons/tb";
 
 const ProductId = (props) => {
   const { product } = props;

@@ -6,7 +6,7 @@ const NewArrivals = () => {
   const [new_products, setNew_products] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/newproducts")
+    fetch("http://localhost:4000/api/products/newproducts")
       .then((response) => response.json())
       .then((data) => setNew_products(data));
   }, []);

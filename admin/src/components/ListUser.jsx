@@ -6,7 +6,7 @@ const ListUser = () => {
   const [allUsers, setAllUsers] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch("http://localhost:4000/allusers")
+    await fetch("http://localhost:4000/api/users/allusers")
       .then((res) => res.json())
       .then((date) => {
         setAllUsers(date);
@@ -18,7 +18,7 @@ const ListUser = () => {
   }, []);
 
   const remove_user = async (id) => {
-    await fetch("http://localhost:4000/removeuser", {
+    await fetch("http://localhost:4000/api/users/removeuser", {
       method: "POST",
       headers: {
         Accept: "application/json",

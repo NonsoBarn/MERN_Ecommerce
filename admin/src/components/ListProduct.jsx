@@ -5,7 +5,7 @@ const ListProduct = () => {
   const [allProducts, setAllProducts] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch("http://localhost:4000/allproducts")
+    await fetch("http://localhost:4000/api/products/allproducts")
       .then((res) => res.json())
       .then((date) => {
         setAllProducts(date);
@@ -17,7 +17,7 @@ const ListProduct = () => {
   }, []);
 
   const remove_product = async (id) => {
-    await fetch("http://localhost:4000/removeproduct", {
+    await fetch("http://localhost:4000/api/products/removeproduct", {
       method: "POST",
       headers: {
         Accept: "application/json",
