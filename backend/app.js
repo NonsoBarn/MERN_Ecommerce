@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Connect to database
 connectDB();
@@ -13,10 +14,29 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
+// Stripe route to create a payment intent
+app.post("/api/create-payment-intent", async (req, res) => {
+  try {
+    const { amount, currency } = req.body;
+
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: currency,
+    });
+
+    res.json({ clientSecret: paymentIntent.client_secret });
+  } catch (error) {
+    console.error("Error creating payment intent:", error);
+    res.status(500).json({ error: "Failed to create payment intent" });
+  }
+});
+
 // Routes
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 // Image storage setup
 const storage = multer.diskStorage({
@@ -37,6 +57,7 @@ app.use("/images", express.static("uploads/images"));
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 // File upload endpoint
 app.post("/upload", upload.single("product"), (req, res) => {
