@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
@@ -12,8 +13,16 @@ import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import AllProducts from "./pages/AllProducts";
 import Home from "./pages/Home";
+import PrivateRoute from "./components/PrivateRoute"; // Make sure PrivateRoute is imported correctly
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    setIsAuthenticated(!!token);
+  }, []);
+
   return (
     <main className="text-tertiary">
       <BrowserRouter>
@@ -48,8 +57,14 @@ export default function App() {
             <Route path=":productId" element={<Product />} />
           </Route>
 
-          <Route path="/cart-page" element={<Cart />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/cart-page" element={<PrivateRoute />}>
+            <Route path="/cart-page" element={<Cart />} />
+          </Route>
+          <Route
+            isAuthenticated={isAuthenticated}
+            path="/login"
+            element={<Login />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
