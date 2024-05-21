@@ -1,31 +1,65 @@
 const User = require("../models/User");
 
 exports.getAllUsers = async (req, res) => {
-  let users = await User.find({});
-  res.send(users);
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
 };
 
 exports.removeUser = async (req, res) => {
-  await User.findOneAndDelete({ id: req.body.id });
-  res.json({ success: true, name: req.body.name });
+  try {
+    await User.findOneAndDelete({ id: req.body.id });
+    res.json({ success: true, name: req.body.name });
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
 };
 
 exports.addToCart = async (req, res) => {
-  let userData = await User.findById(req.user.id);
-  userData.cartData[req.body.itemId] += 1;
-  await User.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
-  res.send("Added");
+  try {
+    let userData = await User.findById(req.user.id);
+    userData.cartData[req.body.itemId] += 1;
+    await User.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
+    res.send("Added");
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
 };
 
 exports.removeFromCart = async (req, res) => {
-  let userData = await User.findById(req.user.id);
-  if (userData.cartData[req.body.itemId] > 0)
-    userData.cartData[req.body.itemId] -= 1;
-  await User.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
-  res.send("Removed");
+  try {
+    let userData = await User.findById(req.user.id);
+    if (userData.cartData[req.body.itemId] > 0)
+      userData.cartData[req.body.itemId] -= 1;
+    await User.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
+    res.send("Removed");
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
 };
 
 exports.getCart = async (req, res) => {
-  let userData = await User.findById(req.user.id);
-  res.json(userData.cartData);
+  try {
+    let userData = await User.findById(req.user.id);
+    res.json(userData.cartData);
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+    res.json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
 };

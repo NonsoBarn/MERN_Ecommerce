@@ -14,7 +14,7 @@ const fetchUser = (req, res, next) => {
       .status(401)
       .send({ errors: "Token has been blacklisted, please login again" });
   }
-  no;
+
   try {
     const data = jwt.verify(token, process.env.JWT_SECRET);
     req.user = data.user;

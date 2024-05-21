@@ -15,6 +15,7 @@ import AllProducts from "./pages/AllProducts";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute"; // Make sure PrivateRoute is imported correctly
 import NotFound from "./components/NotFound";
+import User from "./pages/User";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,7 +27,7 @@ export default function App() {
   }, []);
 
   return (
-    <main className="text-tertiary">
+    <main className="text-tertiary min-h-screen ">
       <BrowserRouter>
         <Header />
         <Routes>
@@ -65,10 +66,17 @@ export default function App() {
           >
             <Route path="/cart-page" element={<Cart />} />
           </Route>
+          {/* <Route
+            path="/user-page"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/user-page" element={<User />} />
+          </Route> */}
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/user-page" element={<User />} />
         </Routes>
-        <Footer />
+        <Footer className="py-4 bg-gray-200" />
       </BrowserRouter>
     </main>
   );

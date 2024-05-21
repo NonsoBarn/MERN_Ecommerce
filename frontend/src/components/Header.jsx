@@ -1,16 +1,31 @@
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import logo from "../assets/bmlogo.png";
-import user from "../assets/user.svg";
-import logout from "../assets/logout.svg";
+
+import { FaRegUserCircle } from "react-icons/fa";
 import Navbar from "./Navbar";
 import { MdMenu, MdClose } from "react-icons/md";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { ShopContext } from "../context/ShopContext";
 
+import UserMenu from "./UserMenu";
+
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
-  const toggleMenu = () => setMenuOpened(!menuOpened);
+  const [userMenuOpened, setUserMenuOpened] = useState(false);
+  const toggleMenu = () => {
+    setMenuOpened(!menuOpened);
+    if (userMenuOpened === true) {
+      setUserMenuOpened(false);
+    }
+  };
+
+  const toggleUserMenu = () => {
+    setUserMenuOpened(!userMenuOpened);
+    if (menuOpened === true) {
+      setMenuOpened(false);
+    }
+  };
 
   const { getTotalCartItems } = useContext(ShopContext);
 
@@ -21,6 +36,9 @@ const Header = () => {
         if (menuOpened) {
           setMenuOpened(false);
         }
+        if (userMenuOpened) {
+          setUserMenuOpened(false);
+        }
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -29,7 +47,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [menuOpened]);
+  }, [menuOpened, userMenuOpened]);
 
   return (
     <header className="max-padd-container w-full z-50">
@@ -40,7 +58,7 @@ const Header = () => {
           <span className="pl-2 pt-5 bold-24 hidden xs:flex">BabcockMall</span>
         </Link>
         {/* Nav & Buttons */}
-        <div className="flexCenter gap-x-4">
+        <div className="flexCenter gap-x-12">
           {/* Desktop navbar */}
           <div>
             <Navbar
@@ -60,6 +78,16 @@ const Header = () => {
               }`}
             />
           </div>
+
+          <div>
+            <UserMenu
+              containerStyles={`${
+                userMenuOpened
+                  ? "flex items-center flex-col gap-y-12 fixed top-20 right-8 p-5 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300 z-50"
+                  : "flex items-center flex-col gap-y-12 fixed top-20  p-5 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300 z-50 -right-[100%]"
+              }`}
+            />
+          </div>
           {/* buttons */}
           <div className="flexBetween gap-x-3 sm:gap-x-2 bold-16">
             {!menuOpened ? (
@@ -73,7 +101,7 @@ const Header = () => {
                 onClick={toggleMenu}
               />
             )}
-            <div className="flexBetween sm:gap-x-6">
+            <div className="flexBetween sm:gap-x-0">
               <NavLink to={"/cart-page"} className={`flex`}>
                 <RiShoppingCart2Line className="p-2 h-10 w-10 hover:text-secondary" />
                 <span className="relative flexCenter w-5 h-5 rounded-full bg-secondary text-primary medium-14 -top-2 right-3">
@@ -81,31 +109,13 @@ const Header = () => {
                 </span>
               </NavLink>
 
-              {localStorage.getItem("auth-token") ? (
-                <NavLink
-                  onClick={() => {
-                    localStorage.removeItem("auth-token");
-                    window.location.replace("/");
-                  }}
-                  to={"/login"}
-                  className={
-                    "btn-secondary flexCenter gap-x-2 medium-16 rounded-xl"
-                  }
-                >
-                  <img src={logout} alt="" height={19} width={19} />
-                  LogOut
-                </NavLink>
-              ) : (
-                <NavLink
-                  to={"/login"}
-                  className={
-                    "btn-secondary flexCenter gap-x-2 medium-16 rounded-xl"
-                  }
-                >
-                  <img src={user} alt="" height={19} width={19} />
-                  Login
-                </NavLink>
-              )}
+              {/* User  */}
+              <div>
+                <FaRegUserCircle
+                  className="p-2 h-10 w-10 hover:text-secondary"
+                  onClick={toggleUserMenu}
+                />
+              </div>
             </div>
           </div>
         </div>
