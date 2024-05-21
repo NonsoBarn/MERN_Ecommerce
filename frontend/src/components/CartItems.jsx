@@ -2,10 +2,55 @@ import { useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
 import {} from "react-icons";
 import { TbTrash } from "react-icons/tb";
+import { loadStripe } from "@stripe/stripe-js";
 
 const CartItems = () => {
   const { all_products, cartItems, removeFromCart, getTotalCartAmount } =
     useContext(ShopContext);
+
+  // const cartProductItems = all_products.filter(
+  //   (product) => cartItems[product.id] > 0
+  // );
+
+  const cartProductItems = all_products
+    .map((product) => ({
+      ...product,
+      quantity: cartItems[product.id],
+    }))
+    .filter((product) => product.quantity > 0);
+
+  console.log(cartProductItems);
+
+  // console.log(cartItems);
+
+  const makePayment = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51NOejcGIASQMxBQjGRaEnQy8Tew2tv9s0cLG0nhROSN6scz5apX0tZ3jIwgGGGNpLQAad3YZBtvCuWA1NwSfoh0x00c6NqKgvV"
+    );
+
+    const body = {
+      products: cartProductItems,
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await fetch(
+      "http://localhost:4000/api/users/create-checkout-session",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+
+    const session = await response.json();
+    // eslint-disable-next-line no-unused-vars
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+  };
   return (
     <section className="max-padd-container bg-primary rounded-3xl">
       <div className="py-10">
@@ -21,7 +66,7 @@ const CartItems = () => {
             </tr>
           </thead>
           <tbody className="border border-slate-900/20">
-            {all_products.map((e) => {
+            {cartProductItems.map((e) => {
               if (cartItems[e.id] > 0) {
                 return (
                   <tr
@@ -81,7 +126,9 @@ const CartItems = () => {
                 <h4 className="bold-18">₦{getTotalCartAmount()}</h4>
               </div>
             </div>
-            <button className="btn-dark w-44 rounded-xl">Checkout</button>
+            <button onClick={makePayment} className="btn-dark w-44 rounded-xl">
+              Checkout
+            </button>
           </div>
           <div className="flex flex-col gap-10">
             <h4 className="bold-20 capitalize">Your coupon code enter here:</h4>

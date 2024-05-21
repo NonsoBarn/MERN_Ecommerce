@@ -16,6 +16,8 @@ import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute"; // Make sure PrivateRoute is imported correctly
 import NotFound from "./components/NotFound";
 import User from "./pages/User";
+import PaymentCancel from "./components/PaymentCancel";
+import PaymentSuccess from "./components/PaymentSuccess";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -75,6 +77,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/user-page" element={<User />} />
+          <Route path="/paysuccess" element={<PaymentSuccess />} />
+          <Route path="/paycancel" element={<PaymentCancel />} />
         </Routes>
         <Footer className="py-4 bg-gray-200" />
       </BrowserRouter>
