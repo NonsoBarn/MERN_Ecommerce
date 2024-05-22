@@ -5,13 +5,15 @@ import { TbTrash } from "react-icons/tb";
 import { loadStripe } from "@stripe/stripe-js";
 
 const CartItems = () => {
-  const { all_products, cartItems, removeFromCart, getTotalCartAmount } =
-    useContext(ShopContext);
+  const {
+    all_products,
+    cartItems,
+    removeFromCart,
+    getTotalCartAmount,
+    userId,
+  } = useContext(ShopContext);
 
-  // const cartProductItems = all_products.filter(
-  //   (product) => cartItems[product.id] > 0
-  // );
-
+  // console.log(userId);
   const cartProductItems = all_products
     .map((product) => ({
       ...product,
@@ -19,7 +21,7 @@ const CartItems = () => {
     }))
     .filter((product) => product.quantity > 0);
 
-  console.log(cartProductItems);
+  // console.log(cartProductItems);
 
   // console.log(cartItems);
 
@@ -30,6 +32,7 @@ const CartItems = () => {
 
     const body = {
       products: cartProductItems,
+      userId: userId,
     };
 
     const headers = {

@@ -40,7 +40,7 @@ const Login = () => {
   };
 
   const signup = async () => {
-    console.log("signup executed", formData);
+    // console.log("signup executed", formData);
     try {
       const response = await fetch("http://localhost:4000/api/auth/signup", {
         method: "POST",

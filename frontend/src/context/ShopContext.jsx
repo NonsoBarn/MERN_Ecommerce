@@ -2,6 +2,7 @@
 import { createContext, useEffect, useState } from "react";
 
 export const ShopContext = createContext(null);
+
 const getDefaultCart = () => {
   let cart = {};
   for (let index = 0; index < 300 + 1; index++) {
@@ -13,6 +14,7 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
   const [all_products, setAll_products] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [userId, setUserId] = useState(null); // Add userId state
 
   useEffect(() => {
     fetch("http://localhost:4000/api/products/allproducts")
@@ -31,12 +33,21 @@ const ShopContextProvider = (props) => {
       })
         .then((response) => response.json())
         .then((data) => setCartItems(data));
+
+      // Fetch userId and set it
+      fetch("http://localhost:4000/api/users/getuser", {
+        method: "GET",
+        headers: {
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setUserId(data.user._id)); // Assuming the response contains the user id
     }
   }, []);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    // console.log(cartItems);
 
     if (localStorage.getItem("auth-token")) {
       fetch("http://localhost:4000/api/users/addtocart", {
@@ -101,8 +112,9 @@ const ShopContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
     getTotalCartItems,
+    userId, // Include userId in context value
   };
-  // console.log(cartItems);
+
   return (
     <ShopContext.Provider value={contextValue}>
       {props.children}

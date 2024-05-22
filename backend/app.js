@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 // Connect to database
 connectDB();
@@ -12,12 +13,12 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
-const orderRoutes = require("./routes/orderRoutes");
 
 // Image storage setup
 const storage = multer.diskStorage({
@@ -38,7 +39,6 @@ app.use("/images", express.static("uploads/images"));
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
 
 // File upload endpoint
 app.post("/upload", upload.single("product"), (req, res) => {

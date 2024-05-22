@@ -3,7 +3,7 @@ import { RiShoppingBag2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Item = ({ id, name, image, old_price, new_price, description }) => {
-  console.log(name, description);
+  // console.log(name, description);
   return (
     <Link
       onClick={window.scrollTo(0, 0)}

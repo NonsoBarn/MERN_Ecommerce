@@ -8,10 +8,10 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Fetch user data from your API or authentication service
+    // Fetching user data from your API or authentication service
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/user"); // Adjust the URL accordingly
+        const response = await axios.get("http://localhost:4000/api/user");
         setUser(response.data);
       } catch (error) {
         console.error("Failed to fetch user:", error);

@@ -3,7 +3,7 @@ const ProductDescription = (props) => {
   // eslint-disable-next-line react/prop-types
   const { product } = props;
 
-  console.log(product);
+  // console.log(product);
   return (
     <div className="max-padd-container mt-20">
       <div className="flex gap-3 mb-4">
