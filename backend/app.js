@@ -19,6 +19,8 @@ app.use(bodyParser.json());
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const stripeRoutes = require("./routes/stripe");
 
 // Image storage setup
 const storage = multer.diskStorage({
@@ -39,6 +41,8 @@ app.use("/images", express.static("uploads/images"));
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/stripe", stripeRoutes);
 
 // File upload endpoint
 app.post("/upload", upload.single("product"), (req, res) => {

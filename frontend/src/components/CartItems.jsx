@@ -40,7 +40,7 @@ const CartItems = () => {
     };
 
     const response = await fetch(
-      "http://localhost:4000/api/users/create-checkout-session",
+      "http://localhost:4000/api/stripe/create-checkout-session",
       {
         method: "POST",
         headers: headers,
