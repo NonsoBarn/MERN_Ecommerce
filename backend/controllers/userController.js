@@ -50,6 +50,19 @@ exports.getCart = async (req, res) => {
   }
 };
 
+exports.clearCart = async (req, res) => {
+  try {
+    let userData = await User.findById(req.user.id);
+    userData.cartData = {};
+    await User.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
+    res
+      .status(200)
+      .send({ success: true, message: "Cart cleared successfully." });
+  } catch (error) {
+    res.status(500).send({ success: false, message: "Server Error", error });
+  }
+};
+
 exports.getUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id);

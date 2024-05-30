@@ -12,7 +12,7 @@ const Offer = () => {
           They&#39;re Gone!
         </h3>
         <Link
-          to={"/"}
+          to={"/all"}
           className="pl-6 text-white bg-tertiary rounded-full flexBetween gap-x-2 medium-16 w-44 mt-10 group"
         >
           Go to shop

@@ -9,6 +9,7 @@ router.get("/getuser", fetchUser, userController.getUser);
 router.post("/removeuser", userController.removeUser);
 router.post("/addtocart", fetchUser, userController.addToCart);
 router.post("/removefromcart", fetchUser, userController.removeFromCart);
+router.post("/clearcart", fetchUser, userController.clearCart);
 router.post("/getcart", fetchUser, userController.getCart);
 
 module.exports = router;

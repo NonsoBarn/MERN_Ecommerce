@@ -68,15 +68,14 @@ export default function App() {
           >
             <Route path="/cart-page" element={<Cart />} />
           </Route>
-          {/* <Route
+          <Route
             path="/user-page"
             element={<PrivateRoute isAuthenticated={isAuthenticated} />}
           >
             <Route path="/user-page" element={<User />} />
-          </Route> */}
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/user-page" element={<User />} />
           <Route path="/paysuccess" element={<PaymentSuccess />} />
           <Route path="/paycancel" element={<PaymentCancel />} />
         </Routes>

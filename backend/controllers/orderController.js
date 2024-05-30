@@ -1,26 +1,25 @@
 const Order = require("../models/Order");
 
-exports.createOrder = async (customer, data) => {
-  const Items = JSON.parse(customer.metadata.cart);
+// const createOrder = async (customer, data) => {
+//   const Items = JSON.parse(customer.metadata.cart);
 
-  const newOrder = new Order({
-    userId: customer.metadata.userId,
-    customerId: data.customer,
-    paymentIntentId: data.payment_intent,
-    products: Items,
-    total: data.amount_total,
-    shipping: data.customer_details,
-  });
+//   const newOrder = new Order({
+//     userId: customer.metadata.userId,
+//     customerId: data.customer,
+//     paymentIntentId: data.payment_intent,
+//     products: Items,
+//     total: data.amount_total,
+//     shipping: data.customer_details,
+//   });
+//   try {
+//     const savedOrder = await newOrder.save();
 
-  try {
-    const savedOrder = await newOrder.save();
-
-    console.log("processed order:", savedOrder);
-    return savedOrder;
-  } catch (err) {
-    console.log(err);
-  }
-};
+//     console.log("processed order:", savedOrder);
+//     return savedOrder;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 // Endpoint to get all orders
 

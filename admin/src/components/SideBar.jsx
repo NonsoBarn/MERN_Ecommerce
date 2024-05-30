@@ -12,6 +12,14 @@ const SideBar = () => {
           <span>User List</span>
         </button>
       </Link>
+
+      <Link to={"/listorder"}>
+        <button className="flexCenter gap-2 rounded-md bg-primary h-12 w-36 xs:w-44 medium-14 xs:medium-16">
+          <img src={listuser} alt="" height={40} width={40} />
+          <span>Order List</span>
+        </button>
+      </Link>
+
       <Link to={"/addproduct"}>
         <button className="flexCenter gap-2 rounded-md bg-primary h-12 w-36 xs:w-44 medium-14 xs:medium-16">
           <img src={addProduct} alt="" height={50} width={50} />

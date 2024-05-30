@@ -20,8 +20,8 @@ const Hero = () => {
             Saving Today!
           </h2>
           <p className="my-5 max-w-[33rem]">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto
-            similique fugiat magni quam eum repudiandae illum.
+            Find the Best Deals on Top-Quality Products. Shop Now and Enjoy
+            Incredible Savings!
           </p>
           {/* buttons */}
           <div className="inline-flex items-center justify-center gap-4 p-2 bg-white rounded-xl">
@@ -29,7 +29,7 @@ const Hero = () => {
               <h5 className="uppercase font-bold">10% off</h5>
               <p className="regular-14">Online Purchases</p>
             </div>
-            <Link to={""} className="btn-dark rounded-xl flexCenter !py-5">
+            <Link to={"/all"} className="btn-dark rounded-xl flexCenter !py-5">
               Shop now
             </Link>
           </div>

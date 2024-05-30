@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { MdOutlineLocalPhone, MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { TbTruckDelivery } from "react-icons/tb";
-import { FaHeart } from "react-icons/fa";
+// import { FaHeart } from "react-icons/fa";
 
 const User = () => {
   const [userData, setUserData] = useState(null);
+  const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -30,6 +31,7 @@ const User = () => {
 
         if (result.success) {
           setUserData(result.user);
+          fetchUserOrders(result.user._id); // Fetch user orders after fetching user data
         } else {
           console.error("Failed to fetch user data:", result.message);
         }
@@ -40,6 +42,18 @@ const User = () => {
 
     fetchUserData();
   }, []);
+
+  const fetchUserOrders = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/orders/user/${userId}`
+      );
+      const data = await response.json();
+      setUserOrders(data);
+    } catch (error) {
+      console.error("Error fetching user orders:", error);
+    }
+  };
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -103,11 +117,13 @@ const User = () => {
                     width={24}
                     height={24}
                   />
-                  <span className="font-bold text-gray-600"> 6 </span>
+                  <span className="font-bold text-gray-600">
+                    {userOrders.length}{" "}
+                  </span>
                 </div>
                 <div className="mt-2 text-sm text-gray-400">Orders</div>
               </a>
-              <a
+              {/* <a
                 href="#"
                 className="flex h-20 w-40 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80"
               >
@@ -120,8 +136,49 @@ const User = () => {
                   <span className="font-bold text-gray-600"> 45 </span>
                 </div>
                 <div className="mt-2 text-sm text-gray-400">Liked</div>
-              </a>
+              </a> */}
             </div>
+          </div>
+        </div>
+
+        {/* Display User Orders */}
+        <div className="my-8">
+          <div className="overflow-x-auto">
+            <table className="table-auto w-full ">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2">Order ID</th>
+                  <th className="px-4 py-2">Products</th>
+                  <th className="px-4 py-2">Total</th>
+                  <th className="px-4 py-2">Date Placed</th>
+                  <th className="px-4 py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userOrders.map((order) => (
+                  <tr key={order._id}>
+                    <td className="border px-4 py-2">{order._id}</td>
+                    <td className="border px-4 py-2 ">
+                      <ul>
+                        {order.products.map((product) => (
+                          <li key={product._id}>
+                            {product.name} - Quantity: {product.quantity}
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+                    <td className="border px-4 py-2">{order.total}</td>
+
+                    <td className="border px-4 py-2">
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="border px-4 py-2">
+                      {order.delivery_status}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

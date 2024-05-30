@@ -36,7 +36,7 @@ const RelatedProducts = () => {
               spaceBetween: 30,
             },
           }}
-          className="mt-5 h-[140px]"
+          className="mt-5 h-[140px] sm:w-[1500px] "
         >
           {related_products.map((item, i) => (
             <SwiperSlide key={i}>
@@ -55,7 +55,9 @@ const RelatedProducts = () => {
                 <div className="flex flex-col gap-y-1">
                   <h4 className="line-clamp-1 medium-16">{item.name}</h4>
                   <p className="line-camp-1">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {item.description.length > 10
+                      ? `${item.description.slice(0, 35)}...`
+                      : item.description}
                   </p>
                   <div className="flexBetween">
                     <div className="flexBetween gap-x-2 medium-16">

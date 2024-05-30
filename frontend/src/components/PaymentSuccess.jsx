@@ -1,4 +1,14 @@
+import { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
+import { useEffect } from "react";
 const PaymentSuccess = () => {
+  const { resetCart } = useContext(ShopContext);
+
+  useEffect(() => {
+    setTimeout(() => {
+      resetCart();
+    }, 1000);
+  }, [resetCart]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-primary">
       <div className="bg-white p-8 rounded-lg shadow-lg text-center">

@@ -1,11 +1,13 @@
 const express = require("express");
-const orderController = require("../controllers/orderController");
+// const orderController = require("../controllers/orderController");
+const Order = require("../models/Order");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Stripe checkout session
 router.post("/create-checkout-session", async (req, res) => {
   const { products, userId } = req.body;
+  // console.log(products);
 
   // Trim the product data to include only essential fields
   const trimmedProducts = products.map((product) => ({
@@ -17,6 +19,7 @@ router.post("/create-checkout-session", async (req, res) => {
 
   // Ensure the trimmed data fits within 500 characters
   const cartMetadata = JSON.stringify(trimmedProducts);
+  // console.log(cartMetadata);
   if (cartMetadata.length > 500) {
     return res
       .status(400)
@@ -30,6 +33,8 @@ router.post("/create-checkout-session", async (req, res) => {
         cart: cartMetadata,
       },
     });
+
+    // console.log(customer);
 
     const lineItems = products.map((product) => ({
       price_data: {
@@ -59,6 +64,27 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+const createOrder = async (customer, data) => {
+  const Items = JSON.parse(customer.metadata.cart);
+
+  const newOrder = new Order({
+    userId: customer.metadata.userId,
+    customerId: data.customer,
+    paymentIntentId: data.payment_intent,
+    products: Items,
+    total: data.amount_total,
+    shipping: data.customer_details,
+  });
+  try {
+    const savedOrder = await newOrder.save();
+
+    console.log("processed order:", savedOrder);
+    return savedOrder;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Stripe web hook
 let endpointSecret;
 router.post(
@@ -74,9 +100,9 @@ router.post(
 
       try {
         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-        // console.log("Webhook verified");
+        console.log("Webhook verified");
       } catch (err) {
-        // console.log(`Webhook Error: ${err.message}`);
+        console.log(`Webhook Error: ${err.message}`);
         res.status(400).send(`Webhook Error: ${err.message}`);
         return;
       }
@@ -93,9 +119,9 @@ router.post(
       stripe.customers
         .retrieve(data.customer)
         .then((customer) => {
-          // console.log(customer);
-          // console.log(data);
-          orderController.createOrder(customer, data);
+          createOrder(customer, data);
+          console.log(customer);
+          console.log(data);
         })
         .catch((err) => console.log(err.message));
     }

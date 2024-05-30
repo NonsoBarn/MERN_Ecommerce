@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ShopContext = createContext(null);
 
@@ -62,6 +64,7 @@ const ShopContextProvider = (props) => {
         .then((response) => response.json())
         .then((data) => console.log(data));
     }
+    toast.success("Item added to cart!");
   };
 
   const removeFromCart = (itemId) => {
@@ -80,6 +83,8 @@ const ShopContextProvider = (props) => {
         .then((response) => response.json())
         .then((data) => console.log(data));
     }
+
+    toast.success("Item removed from cart!");
   };
 
   const getTotalCartAmount = () => {
@@ -105,6 +110,31 @@ const ShopContextProvider = (props) => {
     return totalItem;
   };
 
+  const resetCart = async () => {
+    setCartItems(getDefaultCart());
+
+    if (localStorage.getItem("auth-token")) {
+      try {
+        const response = await fetch(
+          "http://localhost:4000/api/users/clearcart",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "auth-token": `${localStorage.getItem("auth-token")}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId }),
+          }
+        );
+        const data = await response.json();
+        console.log("Cart cleared:", data);
+      } catch (error) {
+        console.error("Error clearing cart:", error);
+      }
+    }
+  };
+
   const contextValue = {
     all_products,
     cartItems,
@@ -112,12 +142,14 @@ const ShopContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
     getTotalCartItems,
-    userId, // Include userId in context value
+    userId,
+    resetCart,
   };
 
   return (
     <ShopContext.Provider value={contextValue}>
       {props.children}
+      <ToastContainer />
     </ShopContext.Provider>
   );
 };
