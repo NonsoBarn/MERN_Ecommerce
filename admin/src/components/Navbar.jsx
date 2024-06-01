@@ -1,5 +1,6 @@
 import logo from "../assets/bmlogo.png";
-import profileIcon from "../assets/profile.png";
+import listuser from "../assets/userad.png";
+import AdminMenu from "./AdminMenu";
 
 const Navbar = () => {
   return (
@@ -11,8 +12,13 @@ const Navbar = () => {
         <div className="hidden sm:flex uppercase bold-22 text-white bg-secondary px-3 rounded-md tracking-widest line-clamp-1 max-xs:bold-18 max-xs:py-2 max-xs:px-1">
           Admin Panel
         </div>
-        <div>
-          <img src={profileIcon} alt="" className="h-12 w-12 rounded-full" />
+        <div className="flex gap-4 items-center text-center">
+          <img
+            src={listuser}
+            alt=""
+            className="h-12 w-12 rounded-full hidden"
+          />
+          <AdminMenu />
         </div>
       </div>
     </nav>

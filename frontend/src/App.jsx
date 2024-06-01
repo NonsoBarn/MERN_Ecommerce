@@ -13,7 +13,7 @@ import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import AllProducts from "./pages/AllProducts";
 import Home from "./pages/Home";
-import PrivateRoute from "./components/PrivateRoute"; // Make sure PrivateRoute is imported correctly
+import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./components/NotFound";
 import User from "./pages/User";
 import PaymentCancel from "./components/PaymentCancel";
