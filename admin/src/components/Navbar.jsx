@@ -1,4 +1,4 @@
-import logo from "../assets/bmlogo.png";
+import logo from "../assets/BULOGO.png";
 import listuser from "../assets/userad.png";
 import AdminMenu from "./AdminMenu";
 

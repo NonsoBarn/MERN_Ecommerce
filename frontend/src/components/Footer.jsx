@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/bmlogo.png";
+import logo from "../assets/BULOGO.png";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 const Footer = () => {
@@ -10,7 +10,7 @@ const Footer = () => {
         <Link to={"/"} className="flex items-center ga-x-2">
           <img src={logo} alt="logoimg" height={41} width={41} />
           <span className="text-white pl-2 pt-5 bold-24 hidden xs:flex">
-            BabcockMall
+            BabcockUniversity Mall
           </span>
         </Link>
         {/* nav */}

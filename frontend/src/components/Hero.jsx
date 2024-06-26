@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import RelatedProducts from "./RelatedProducts";
-import herosvg from "../assets/hero.svg";
+import herosvg from "../assets/hero1.svg";
 
 const Hero = () => {
   return (

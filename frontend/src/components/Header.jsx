@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import logo from "../assets/bmlogo.png";
+import logo from "../assets/BULOGO.png";
 
 import { FaRegUserCircle } from "react-icons/fa";
 import Navbar from "./Navbar";
@@ -55,7 +55,9 @@ const Header = () => {
         {/* logo */}
         <Link to={"/"} className="flex items-center ga-x-2">
           <img src={logo} alt="logoimg" height={41} width={41} />
-          <span className="pl-2 pt-5 bold-24 hidden xs:flex">BabcockMall</span>
+          <span className="pl-2 pt-5 bold-24 hidden xs:flex">
+            BabcockUniversity Mall
+          </span>
         </Link>
         {/* Nav & Buttons */}
         <div className="flexCenter gap-x-12">
