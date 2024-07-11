@@ -53,8 +53,8 @@ router.post("/create-checkout-session", async (req, res) => {
       customer: customer.id,
       line_items: lineItems,
       mode: "payment",
-      success_url: "http://127.0.0.1:5173/paysuccess",
-      cancel_url: "http://127.0.0.1:5173/paycancel",
+      success_url: "http://localhost:5173/paysuccess",
+      cancel_url: "http://localhost:5173/paycancel",
     });
 
     res.json({ id: session.id });

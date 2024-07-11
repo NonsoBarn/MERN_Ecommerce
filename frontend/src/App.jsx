@@ -53,7 +53,7 @@ export default function App() {
             path="/miscellaneous"
             element={
               <Category
-                category={"miscellaneous"}
+                category={"Miscellaneous"}
                 banner={Miscellaneousbanner}
               />
             }
